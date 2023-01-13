@@ -18,13 +18,18 @@ def bubble_sort(nums):
                 nums[i], nums[j] = nums[j], nums[i]
     return nums
 
-n = make_arr()
-print(n)
-bubble_sort(n)
-print(n)
 
 def insertion_sort(nums):
-    for i, e in enumerate(nums):
-        if e > nums[i+1]:
-            
-            
+    for i in range(1,len(nums)):
+        target = nums[i]
+        j = i - 1
+        while j >= 0 and nums[j] > target:
+            nums[j + 1] = nums[j]
+            j -= 1
+        nums[j + 1] = target
+    return nums
+
+n = make_arr()
+print(n)
+insertion_sort(n)
+print(n)
