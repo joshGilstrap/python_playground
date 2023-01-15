@@ -1,15 +1,17 @@
 from timeit import repeat
 from random import randint
+from datetime import timedelta
 
-ARR_SIZE = 100000
+ARR_SIZE = 10000
 MAX_VALUE = 1000
 
 def time_algorithm(alg, arr):
     setup = f'from __main__ import {alg}' \
         if alg != 'sorted' else ''
     stmt = f'{alg}({arr})'
-    times = repeat(setup=setup, stmt=stmt, repeat=3, number=10)
-    print(f'Algorithm: {alg}. Minimum execution time: {min(times)}')
+    number = 10
+    times = repeat(setup=setup, stmt=stmt, repeat=3, number=number)
+    print(f'Algorithm: {alg}. Best of {number} iterations: {timedelta(seconds=min(times))}')
 
 def make_arr():
     arr = [randint(0,MAX_VALUE) for i in range(ARR_SIZE)]
@@ -70,11 +72,12 @@ def merge(arr1, arr2):
     return merged_arr
 
 n = make_arr()
-print(f'Size: {len(n)}\n')
-print('|--------------------------------------------------------------------------|')
-# time_algorithm('bubble_sort', n)
-# print('\n')
-# time_algorithm('insertion_sort', n)
-# print('\n')
-# time_algorithm('merge_sort', n)
-print('|--------------------------------------------------------------------------|')
+print(f'Array Size: {len(n)}')
+print(f'Value range: (0, {MAX_VALUE})\n')
+print('|-----------------------------------------------------------------------------|')
+time_algorithm('bubble_sort', n)
+print('\n')
+time_algorithm('insertion_sort', n)
+print('\n')
+time_algorithm('merge_sort', n)
+print('|-----------------------------------------------------------------------------|\n')
