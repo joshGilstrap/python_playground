@@ -1,4 +1,4 @@
-A place for practicing Python and data structures & algorithms, currently implementing sorting algorithms with timed readouts.
+A place for practicing Python and data structures & algorithms, currently implementing sorting algorithms with runtime readouts.
 
 Current state of affairs:
 
