@@ -3,7 +3,7 @@ from random import randint
 from datetime import timedelta
 
 ARR_SIZE = 10000
-MAX_VALUE = 1000
+MAX_VALUE = 999
 
 def time_algorithm(alg, arr):
     setup = f'from __main__ import {alg}' \
@@ -11,7 +11,9 @@ def time_algorithm(alg, arr):
     stmt = f'{alg}({arr})'
     number = 10
     times = repeat(setup=setup, stmt=stmt, repeat=3, number=number)
-    print(f'Algorithm: {alg}. Best of {number} iterations: {timedelta(seconds=min(times))}')
+    # print(f'Algorithm: {alg}. Best of {number} iterations: {timedelta(seconds=min(times))}')
+    print(f'Algorithm: {alg}. Best of {number} iterations: {min(times)}')
+
 
 def make_arr():
     arr = [randint(0,MAX_VALUE) for i in range(ARR_SIZE)]
@@ -36,6 +38,7 @@ def insertion_sort(nums):
         nums[j + 1] = target
     return nums
 
+
 def merge_sort(nums):
     if len(nums) < 2:
         return nums
@@ -45,6 +48,7 @@ def merge_sort(nums):
     left = merge_sort(nums[:middle])
     right = merge_sort(nums[middle:])
     return merge(left, right)
+
 
 def merge(arr1, arr2):
     if len(arr1) == 0:
@@ -71,6 +75,25 @@ def merge(arr1, arr2):
             break
     return merged_arr
 
+
+def quick_sort(nums):
+    if len(nums) < 2:
+        return nums
+
+    pivot = nums[randint(0,len(nums) - 1)]
+
+    lower, middle, higher = [], [], []
+    for i, e in enumerate(nums):
+        if e < pivot:
+            lower.append(nums[i])
+        elif e > pivot:
+            higher.append(nums[i])
+        else:
+            middle.append(nums[i])
+
+    return quick_sort(lower) + middle + quick_sort(higher)
+
+
 n = make_arr()
 print(f'Array Size: {len(n)}')
 print(f'Value range: (0, {MAX_VALUE})\n')
@@ -80,4 +103,6 @@ print('\n')
 time_algorithm('insertion_sort', n)
 print('\n')
 time_algorithm('merge_sort', n)
+print('\n')
+time_algorithm('quick_sort', n)
 print('|-----------------------------------------------------------------------------|\n')
