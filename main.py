@@ -28,7 +28,7 @@ def run_all():
     print('\nSorting algs:')
     n = srt.quick_sort(srt.make_arr())
     tar = n[randint(0, srt.ARR_SIZE - 1)]
-    
+
     print(f'Array Size: {len(n)}')
     print(f'Value range: (0, {srt.MAX_VALUE})')
     print('|-----------------------------------------------------------------------------|\n')
@@ -42,8 +42,9 @@ def run_all():
     print('\n')
     print('|-----------------------------------------------------------------------------|\n')
 
+    print('Searching algs:')
     print(f'Array Size: {len(n)}')
-    print(f'Data Range: (0, {srt.MAX_VALUE})')
+    print(f'Value range: (0, {srt.MAX_VALUE})')
     print(f'Target: {tar}')
     print('|-----------------------------------------------------------------------------|\n')
     searching_time_external('linear_search', n, tar)

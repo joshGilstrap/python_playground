@@ -2,8 +2,8 @@ from timeit import repeat
 from random import randint
 from datetime import timedelta
 
-ARR_SIZE = 1000
 MAX_VALUE = 999
+ARR_SIZE = randint(2, 5000)
 
 def sorting_time_internal(alg, arr):
     setup = f'from __main__ import {alg}' \
