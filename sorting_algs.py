@@ -2,8 +2,8 @@ from timeit import repeat
 from random import randint
 from datetime import timedelta
 
-ARR_SIZE = 10000
-MAX_VALUE = 999
+ARR_SIZE = 20
+MAX_VALUE = 99
 
 def time_algorithm(alg, arr):
     setup = f'from __main__ import {alg}' \
@@ -11,8 +11,7 @@ def time_algorithm(alg, arr):
     stmt = f'{alg}({arr})'
     number = 10
     times = repeat(setup=setup, stmt=stmt, repeat=3, number=number)
-    # print(f'Algorithm: {alg}. Best of {number} iterations: {timedelta(seconds=min(times))}')
-    print(f'Algorithm: {alg}. Best of {number} iterations: {min(times)}')
+    print(f'Algorithm: {alg}. Best of {number} iterations: {timedelta(seconds=min(times))}')
 
 
 def make_arr():
@@ -90,19 +89,19 @@ def quick_sort(nums):
             higher.append(nums[i])
         else:
             middle.append(nums[i])
-
     return quick_sort(lower) + middle + quick_sort(higher)
 
-
-n = make_arr()
-print(f'Array Size: {len(n)}')
-print(f'Value range: (0, {MAX_VALUE})\n')
-print('|-----------------------------------------------------------------------------|')
-time_algorithm('bubble_sort', n)
-print('\n')
-time_algorithm('insertion_sort', n)
-print('\n')
-time_algorithm('merge_sort', n)
-print('\n')
-time_algorithm('quick_sort', n)
-print('|-----------------------------------------------------------------------------|\n')
+def run_sort():
+    n = make_arr()
+    print(f'\nArray Size: {len(n)}')
+    print(f'Value range: (0, {MAX_VALUE})')
+    print('|-----------------------------------------------------------------------------|\n')
+    time_algorithm('bubble_sort', n)
+    print('\n')
+    time_algorithm('insertion_sort', n)
+    print('\n')
+    time_algorithm('merge_sort', n)
+    print('\n')
+    time_algorithm('quick_sort', n)
+    print('\n')
+    print('|-----------------------------------------------------------------------------|\n')
