@@ -2,7 +2,6 @@ from datetime import timedelta
 from timeit import repeat
 from random import randint
 import sorting_algs as srt
-import search_algs as srch
 
 def searching_time_external(alg, arr, target):
     setup = f'from search_algs import {alg}'
