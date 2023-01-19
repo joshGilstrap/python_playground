@@ -2,10 +2,10 @@ from timeit import repeat
 from random import randint
 from datetime import timedelta
 
-ARR_SIZE = 20
-MAX_VALUE = 99
+ARR_SIZE = 1000
+MAX_VALUE = 999
 
-def time_algorithm(alg, arr):
+def sorting_time_internal(alg, arr):
     setup = f'from __main__ import {alg}' \
         if alg != 'sorted' else ''
     stmt = f'{alg}({arr})'
@@ -91,17 +91,18 @@ def quick_sort(nums):
             middle.append(nums[i])
     return quick_sort(lower) + middle + quick_sort(higher)
 
+
 def run_sort():
     n = make_arr()
     print(f'\nArray Size: {len(n)}')
     print(f'Value range: (0, {MAX_VALUE})')
     print('|-----------------------------------------------------------------------------|\n')
-    time_algorithm('bubble_sort', n)
+    sorting_time_internal('bubble_sort', n)
     print('\n')
-    time_algorithm('insertion_sort', n)
+    sorting_time_internal('insertion_sort', n)
     print('\n')
-    time_algorithm('merge_sort', n)
+    sorting_time_internal('merge_sort', n)
     print('\n')
-    time_algorithm('quick_sort', n)
+    sorting_time_internal('quick_sort', n)
     print('\n')
     print('|-----------------------------------------------------------------------------|\n')

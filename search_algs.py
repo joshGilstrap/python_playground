@@ -1,46 +1,50 @@
+from timeit import repeat
 from random import randint
+from datetime import timedelta
 import sorting_algs as sa
 
-# def binary_search(nums):
-#     target = nums[randint(0, sa.ARR_SIZE - 1)]
-#     print(target, '\n')
-#     # check = len(nums) // 2
-#     # for i in nums:
-#     #     if nums[check] == nums[target]:
-#     #         return check
-#     #     if nums[check] > nums[target]:
-#     #         check = nums[check:]
-#     #         break
-#     #     check = nums[:check]
-#     #     break
-#     # return None
-#     while len(nums) > 1:
-#         check = len(nums) // 2
-#         if nums[check] == target:
-#             return check
-#         if nums[check] > target:
-#             nums = nums[:check]
-#         elif nums[check] < target:
-#             nums = nums[check:]
-#     return None
+def searching_time_internal(alg, arr, target):
+    setup = f'from __main__ import {alg}'
+    if alg == 'binary_search':
+        stmt = f'{alg} ({arr}, 0, {len(arr) - 1}, {target})'
+    else:
+        stmt = f'{alg}({arr}, {target})'
+    number = 10
+    times = repeat(setup=setup, stmt=stmt, repeat=3, number=number)
+    print(f'Alogrithm: {alg}. Best of {number} iterations: {timedelta(seconds=min(times))}')
+
+
+def linear_search(nums, target):
+    for i, e in enumerate(nums):
+        if e == target:
+            return i
+    return None
 
 
 def binary_search(nums, left, right, target):
+    index = 0
     if left > right:
-        return None
-    check = (right - left) // 2
-    while nums[check] != target:
-        if target > nums[check]:
-            left = check
-            binary_search(nums, left, right, target)
-        elif target < nums[check]:
-            right = check
-            binary_search(nums, left, right, target)
-    return check
+        index = None
+    else:
+        middle = left + (right - left) // 2
+        if nums[middle] == target:
+            index = middle
+        elif target > nums[middle]:
+            index = binary_search(nums, middle + 1, right, target)
+        else:
+            index = binary_search(nums, left, middle - 1, target)
+    return index
 
 
-n = sa.quick_sort(sa.make_arr())
-print(n)
-tar = n[randint(0, sa.ARR_SIZE - 1)]
-print(tar)
-print(binary_search(n, 0, len(n) - 1, tar))
+def run_search():
+    n = sa.quick_sort(sa.make_arr())
+    tar = n[randint(0, sa.ARR_SIZE - 1)]
+    print(f'\nArray Size: {len(n)}')
+    print(f'Data Range: (0, {sa.MAX_VALUE})')
+    print(f'Target: {tar}')
+    print('|-----------------------------------------------------------------------------|\n')
+    searching_time_internal('linear_search', n, tar)
+    print('\n')
+    searching_time_internal('binary_search', n, tar)
+    print('\n')
+    print('|-----------------------------------------------------------------------------|\n')
