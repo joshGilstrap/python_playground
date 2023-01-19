@@ -1,5 +1,7 @@
-A place for practicing Python and data structures & algorithms, currently implementing sorting algorithms with runtime readouts.
+A Python playground for practicing Pythonic implementations.
+Python 3.11.1
+Author: Josh Gilstrap
 
 Current state of affairs:
 
-![Screen Shot 2023-01-15 at 12 57 16 PM](https://user-images.githubusercontent.com/5957735/212567143-0eca1b69-8fb9-4f78-88cc-8496d5cdddfe.png)
+![Screen Shot 2023-01-19 at 7 10 32 AM](https://user-images.githubusercontent.com/5957735/213479801-2604ea0b-ba3a-4599-8bd8-77ad68567120.png)
