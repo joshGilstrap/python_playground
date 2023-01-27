@@ -36,6 +36,19 @@ def binary_search(nums, left, right, target):
     return index
 
 
+def linear_search_sentinal(nums, target):
+    size = len(nums) - 1
+    end = nums[size]
+    nums[size] = target
+    current = 0
+    while nums[current] != target:
+        current += 1
+    nums[size] = end
+    if current < size or nums[size] == target:
+        return current
+    return -1
+
+
 def run_search():
     n = sa.quick_sort(sa.make_arr())
     tar = n[randint(0, sa.ARR_SIZE - 1)]
@@ -45,6 +58,10 @@ def run_search():
     print('|-----------------------------------------------------------------------------|\n')
     searching_time_internal('linear_search', n, tar)
     print('\n')
+    searching_time_internal('linear_search_sentinal', n, tar)
+    print('\n')
     searching_time_internal('binary_search', n, tar)
     print('\n')
     print('|-----------------------------------------------------------------------------|\n')
+    
+run_search()
